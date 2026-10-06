@@ -1,0 +1,27 @@
+.pteromonaco-editor {
+    position: relative;
+    height: 50dvh;
+    min-height: 16rem;
+    overflow: hidden;
+    border: 1px solid var(--editor-border, #3f3f46);
+    border-radius: var(--radius-sm, 4px);
+    background: var(--editor-background, #18181b);
+    font-family: var(--font-mono, ui-monospace, monospace);
+}
+.pteromonaco-editor__mount { height: 100%; width: 100%; font-family: inherit; }
+.pteromonaco-editor:focus-within { outline: 2px solid var(--ring, #818cf8); outline-offset: -2px; }
+.pteromonaco-editor__status {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: var(--editor-background, #18181b);
+    color: var(--editor-foreground, #e4e4e7);
+    font: 0.875rem/1.5 var(--font-sans, sans-serif);
+}
+@media (min-width: 640px) {
+    .pteromonaco-editor { height: calc(100dvh - 22rem); min-height: 20rem; }
+}
+@media (min-width: 1024px) {
+    .pteromonaco-editor { height: calc(100dvh - 20rem); }
+}

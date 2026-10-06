@@ -1,0 +1,19 @@
+{
+  "name": "@pterodactyl/sdk",
+  "version": "2.0.0-beta.4",
+  "type": "module",
+  "license": "MIT",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./runtime-stub.mjs"
+    },
+    "./api": {
+      "types": "./types/api.d.ts",
+      "default": "./api-runtime-stub.mjs"
+    },
+    "./vite": "./vite.mjs",
+    "./manifest.schema.json": "./manifest.schema.json"
+  }
+}

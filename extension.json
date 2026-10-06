@@ -1,0 +1,18 @@
+{
+  "$schema": "./vendor/pterodactyl-sdk/manifest.schema.json",
+  "id": "pteromonaco",
+  "name": "PteroMonaco",
+  "version": "1.0.0",
+  "description": "Replace the server file editor with Monaco while retaining native file actions.",
+  "author": "Zephrynis",
+  "requires": {
+    "sdk": ">=2.0.0-beta.4 <3.0"
+  },
+  "ui": {
+    "entry": "dist/client.js",
+    "mode": "native",
+    "components": [
+      "server.files.editor"
+    ]
+  }
+}
