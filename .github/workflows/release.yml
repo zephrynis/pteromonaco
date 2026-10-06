@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - '[0-9]*'
 
 permissions:
   contents: write
@@ -38,9 +38,9 @@ jobs:
           const version = read('package.json').version;
           const manifest = read('extension.json');
           const lock = read('package-lock.json');
-          if (process.env.RELEASE_TAG !== `v${version}` || manifest.version !== version ||
+          if (process.env.RELEASE_TAG !== version || manifest.version !== version ||
               lock.version !== version || lock.packages[''].version !== version) {
-            throw new Error('Tag must be v<version>, matching package.json, extension.json, and package-lock.json.');
+            throw new Error('Tag must be <version>, matching package.json, extension.json, and package-lock.json.');
           }
           JS
 
@@ -56,9 +56,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          asset="release/pteromonaco-${RELEASE_TAG#v}.pteroext"
+          asset="release/pteromonaco-${RELEASE_TAG}.pteroext"
           test -s "$asset"
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release edit "$RELEASE_TAG" --title "$RELEASE_TAG"
             gh release upload "$RELEASE_TAG" "$asset" --clobber
           else
             flags=()
@@ -66,5 +67,5 @@ jobs:
               flags+=(--prerelease)
             fi
             gh release create "$RELEASE_TAG" "$asset" \
-              --verify-tag --generate-notes --title "PteroMonaco $RELEASE_TAG" "${flags[@]}"
+              --verify-tag --generate-notes --title "$RELEASE_TAG" "${flags[@]}"
           fi
