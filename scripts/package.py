@@ -19,3 +19,14 @@ with ZipFile(out, 'w', compression=ZIP_DEFLATED, compresslevel=9) as archive:
     for name in ['LICENSE', 'ThirdPartyNotices.txt']:
         archive.write(root / 'node_modules' / 'monaco-editor' / name, 'notices/monaco-' + name)
 print(f'{out} ({out.stat().st_size:,} bytes)')
+
+download = out.with_suffix('.zip')
+with ZipFile(download, 'w', compression=ZIP_DEFLATED, compresslevel=9) as archive:
+    archive.write(out, out.name)
+    archive.writestr('README.txt', (
+        'Thank you for downloading PteroMonaco!\n\n'
+        'To install, upload the included .pteroext file in Admin > Extensions,\n'
+        'enable PteroMonaco, and reload your browser.\n\n'
+        'For support, join our Discord: https://discord.gg/32KvMKFVpU\n'
+    ))
+print(f'{download} ({download.stat().st_size:,} bytes)')

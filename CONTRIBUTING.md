@@ -22,6 +22,8 @@ npm run package     # Also creates release/pteromonaco-1.0.0.pteroext
 
 The `.pteroext` is a ZIP with `extension.json` at its root and a runtime-only `dist/`. It omits source maps, source code, node_modules, tests, and the development SDK. Third-party license notices are included.
 
+Packaging also creates `release/pteromonaco-1.0.0.zip`, containing the `.pteroext` and a `README.txt` with a thank-you message, installation instructions, and the Discord support link. The release workflow uploads this ZIP as an Actions artifact.
+
 ## Project structure
 
 - `src/client/index.tsx`: lazy component registration.
