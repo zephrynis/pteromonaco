@@ -35,6 +35,19 @@ npm run package     # Also creates release/pteromonaco-1.0.0.pteroext
 
 The `.pteroext` is a ZIP with `extension.json` at its root and a runtime-only `dist/`. It omits source maps, source code, node_modules, tests, and the development SDK. Third-party license notices are included.
 
+## Releases
+
+The GitHub Actions release workflow runs when a `v*` tag is pushed. The tag must match the version in `package.json`, `package-lock.json`, and `extension.json`. It installs dependencies with `npm ci`, runs all checks, builds the archive, and attaches `pteromonaco-<version>.pteroext` to a GitHub Release with generated notes. Tags containing a hyphen publish prereleases. Rerunning a successful workflow replaces the archive on the existing release.
+
+To publish the current version after its changes are committed and pushed:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+For later releases, update the package and lockfile together with `npm version <version> --no-git-tag-version`, update `extension.json` and the README's archive examples, then commit, push, and tag that version. The workflow uses GitHub's built-in token; no additional secret is needed.
+
 ## Install
 
 Upload `release/pteromonaco-1.0.0.pteroext` in **Admin → Extensions** and enable **PteroMonaco**, then reload the browser.
